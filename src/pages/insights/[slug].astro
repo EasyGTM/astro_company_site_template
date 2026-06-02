@@ -19,7 +19,7 @@ const articleUrl = absoluteUrl(`/insights/${post.id}`);
 const schema = [
   buildBreadcrumbSchema([
     { name: "Home", item: absoluteUrl("/") },
-    { name: "Insights", item: absoluteUrl("/insights") },
+    { name: "Blogs", item: absoluteUrl("/insights") },
     { name: post.data.title, item: articleUrl },
   ]),
   {

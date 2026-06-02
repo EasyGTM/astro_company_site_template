@@ -10,19 +10,19 @@ const categories = [
 
 const schema = buildBreadcrumbSchema([
   { name: "Home", item: absoluteUrl("/") },
-  { name: "Insights", item: absoluteUrl("/insights") },
+  { name: "Blogs", item: absoluteUrl("/insights") },
 ]);
 ---
 
 <Base
-  title="Insights"
-  description="Demo articles written for both classic SEO and answer-engine retrieval. Replace them with your own expertise or use them as formatting references."
+  title="Blogs"
+  description="Demo blog articles written for both classic SEO and answer-engine retrieval. Replace them with your own expertise or use them as formatting references."
   schema={schema}
 >
   <section class="section pt-36 pb-12">
     <div class="container text-center max-w-5xl mx-auto">
       <div class="fade-in-section">
-        <span class="eyebrow">Insights</span>
+        <span class="eyebrow">Blogs</span>
         <h1 class="type-h1 mt-4">
           Content examples built to answer real questions clearly.
         </h1>
@@ -50,7 +50,7 @@ const schema = buildBreadcrumbSchema([
         {
           insights.map((post, index) => (
             <article
-              class="fade-in-section rounded-[1.75rem] border border-border bg-white/85 p-8 dark:border-darkmode-border dark:bg-theme-darkmode-body/85"
+              class="fade-in-section rounded-[1.75rem] border border-border bg-white/85 p-8 dark:border-darkmode-border dark:bg-darkmode-light/90"
               style={`transition-delay:${index * 75}ms`}
             >
               <span class="eyebrow">{post.data.categories[0]}</span>
@@ -60,7 +60,7 @@ const schema = buildBreadcrumbSchema([
                 href={`/insights/${post.id}`}
                 class="mt-8 inline-flex items-center gap-2 font-bold uppercase tracking-widest text-sm text-primary"
               >
-                Read insight
+                Read blog
                 <span aria-hidden="true">→</span>
               </a>
             </article>

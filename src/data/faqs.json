@@ -8,8 +8,8 @@
     "answer": "Update src/data/site.json. It centralizes brand identity, navigation, contact details, CTAs, social links, form configuration, and global SEO defaults."
   },
   {
-    "question": "How do I edit services, case studies, and insights?",
-    "answer": "Services, work examples, and insight articles live in content collections under src/content. Most content changes do not require touching Astro components."
+    "question": "How do I edit services, case studies, and blogs?",
+    "answer": "Services, work examples, and blog articles live in content collections under src/content. Most content changes do not require touching Astro components."
   },
   {
     "question": "Does the contact form need a backend?",

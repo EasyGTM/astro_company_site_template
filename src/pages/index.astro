@@ -48,7 +48,7 @@ const homeSchema = {
           </h1>
           <p class="type-lead mt-8 max-w-3xl">
             This template gives you a polished home page, service pages, case
-            studies, insights, legal pages, structured data, and content
+            studies, blogs, legal pages, structured data, and content
             collections that are easy for humans and AI IDEs to update.
           </p>
           <div class="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -69,7 +69,7 @@ const homeSchema = {
             <li>
               Static-first Astro architecture with lightweight interactivity.
             </li>
-            <li>Collection-driven services, work, and insight content.</li>
+            <li>Collection-driven services, work, and blog content.</li>
             <li>Configurable contact form with REST endpoint support.</li>
             <li>Structured data, sitemap, robots, and `llms.txt` defaults.</li>
             <li>AI-editor docs for Codex, Claude, Gemini, and Copilot.</li>
@@ -135,7 +135,7 @@ const homeSchema = {
         {
           services.map((service, index) => (
             <article
-              class="fade-in-section rounded-[1.75rem] border border-border bg-white/80 p-8 dark:border-darkmode-border dark:bg-theme-darkmode-body/80"
+              class="fade-in-section rounded-[1.75rem] border border-border bg-white/80 p-8 dark:border-darkmode-border dark:bg-darkmode-light/90"
               style={`transition-delay:${index * 90}ms`}
             >
               <span class="eyebrow">{service.data.category}</span>
@@ -263,13 +263,13 @@ const homeSchema = {
         class="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
       >
         <div class="fade-in-section">
-          <span class="eyebrow">Insights</span>
+          <span class="eyebrow">Blogs</span>
           <h2 class="type-h2-primary mt-3">
             Demo content designed for search engines and answer engines.
           </h2>
         </div>
         <a href="/insights" class="btn btn-outline-primary fade-in-section"
-          >Read all insights</a
+          >Read all blogs</a
         >
       </div>
 
@@ -287,7 +287,7 @@ const homeSchema = {
                 href={`/insights/${post.id}`}
                 class="mt-8 inline-flex items-center gap-2 font-bold uppercase tracking-widest text-sm text-primary"
               >
-                Read insight
+                Read blog
                 <span aria-hidden="true">→</span>
               </a>
             </article>
@@ -317,7 +317,7 @@ const homeSchema = {
           {
             faqs.slice(0, 4).map((faq, index) => (
               <details
-                class="fade-in-section rounded-[1.5rem] border border-border bg-white px-6 py-5 dark:border-darkmode-border dark:bg-theme-darkmode-body"
+                class="fade-in-section rounded-[1.5rem] border border-border bg-white px-6 py-5 dark:border-darkmode-border dark:bg-darkmode-light"
                 style={`transition-delay:${index * 75}ms`}
               >
                 <summary class="cursor-pointer list-none font-bold text-text-dark dark:text-darkmode-text-dark">

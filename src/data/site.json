@@ -13,6 +13,9 @@
     "logo_height": "40",
     "logo_text": "Skynet"
   },
+  "template": {
+    "repo_url": "https://github.com/EasyGTM/astro_company_site_template"
+  },
   "company": {
     "name": "Skynet",
     "legal_name": "Skynet LLC",
@@ -56,19 +59,19 @@
     "sitemap_exclude": []
   },
   "llms": {
-    "purpose": "Skynet uses this site to explain its services, show proof of work, publish insights, and capture new inquiries through a configurable contact flow.",
+    "purpose": "Skynet uses this site to explain its services, show proof of work, publish blog content, and capture new inquiries through a configurable contact flow.",
     "routes": [
       { "label": "Home", "url": "/" },
       { "label": "Services", "url": "/services" },
       { "label": "Work", "url": "/work" },
-      { "label": "Insights", "url": "/insights" },
+      { "label": "Blogs", "url": "/insights" },
       { "label": "Process", "url": "/process" },
       { "label": "About", "url": "/about" },
       { "label": "Contact", "url": "/contact" }
     ],
     "notes": [
       "Content is written in an answer-first style with clear headings and scannable sections.",
-      "Services, work, and insights live in structured content collections.",
+      "Services, work, and blogs live in structured content collections.",
       "Organization, service, article, FAQ, and breadcrumb schema may appear when relevant."
     ]
   },
@@ -86,7 +89,11 @@
       { "name": "Home", "url": "/" },
       { "name": "Services", "url": "/services" },
       { "name": "Work", "url": "/work" },
-      { "name": "Insights", "url": "/insights" },
+      { "name": "Blogs", "url": "/insights" },
+      {
+        "name": "GitHub",
+        "url": "https://github.com/EasyGTM/astro_company_site_template"
+      },
       { "name": "Process", "url": "/process" },
       { "name": "About", "url": "/about" }
     ],
@@ -94,7 +101,11 @@
       { "name": "Home", "url": "/" },
       { "name": "Services", "url": "/services" },
       { "name": "Work", "url": "/work" },
-      { "name": "Insights", "url": "/insights" },
+      { "name": "Blogs", "url": "/insights" },
+      {
+        "name": "GitHub",
+        "url": "https://github.com/EasyGTM/astro_company_site_template"
+      },
       { "name": "Process", "url": "/process" },
       { "name": "About", "url": "/about" },
       { "name": "FAQ", "url": "/faq" },
@@ -104,8 +115,8 @@
     ]
   },
   "cta": {
-    "label": "Start a project",
-    "link": "/contact"
+    "label": "Use this template",
+    "link": "https://github.com/EasyGTM/astro_company_site_template"
   },
   "footer": {
     "headline": "Build a services website that feels fast, credible, and easy to customize.",
@@ -122,7 +133,7 @@
       {
         "name": "GitHub",
         "icon": "FaGithub",
-        "link": "https://github.com/skynet-template"
+        "link": "https://github.com/EasyGTM/astro_company_site_template"
       },
       {
         "name": "X",

@@ -5,12 +5,20 @@ import { site } from "@/lib/site";
 import { markdownify } from "@/lib/utils/textConverter";
 
 const year = new Date().getFullYear();
+const isExternalLink = (url: string) => /^https?:\/\//.test(url);
 const footerLinks = site.navigation.footer;
 const footerGroups = [
   {
     title: "Explore",
     links: footerLinks.filter((item) =>
-      ["/", "/services", "/work", "/insights", "/process"].includes(item.url),
+      [
+        "/",
+        "/services",
+        "/work",
+        "/insights",
+        site.template.repo_url,
+        "/process",
+      ].includes(item.url),
     ),
   },
   {
@@ -59,6 +67,10 @@ const footerGroups = [
                 <li>
                   <a
                     href={item.url}
+                    target={isExternalLink(item.url) ? "_blank" : undefined}
+                    rel={isExternalLink(item.url)
+                      ? "noopener noreferrer"
+                      : undefined}
                     class="text-text transition-colors hover:text-primary dark:text-darkmode-text/80 dark:hover:text-darkmode-primary"
                   >
                     {item.name}
@@ -83,6 +95,8 @@ const footerGroups = [
     />
     <a
       href={site.cta.link}
+      target={isExternalLink(site.cta.link) ? "_blank" : undefined}
+      rel={isExternalLink(site.cta.link) ? "noopener noreferrer" : undefined}
       class="text-sm font-bold uppercase tracking-widest text-text transition-colors hover:text-primary dark:text-darkmode-text/80 dark:hover:text-darkmode-primary"
     >
       {site.cta.label}
