@@ -6,40 +6,40 @@
     SKYNET
   </text>
   <rect x="104" y="156" width="424" height="24" rx="12" fill="#EEE7FF" />
-  <text x="104" y="242" fill="#101828" font-family="Sora, Arial, sans-serif" font-size="66" font-weight="700">
+  <text x="104" y="236" fill="#101828" font-family="Sora, Arial, sans-serif" font-size="60" font-weight="700">
     Launch a service
   </text>
-  <text x="104" y="318" fill="#101828" font-family="Sora, Arial, sans-serif" font-size="66" font-weight="700">
-    company site built
+  <text x="104" y="304" fill="#101828" font-family="Sora, Arial, sans-serif" font-size="60" font-weight="700">
+    company site
   </text>
-  <text x="104" y="394" fill="#101828" font-family="Sora, Arial, sans-serif" font-size="66" font-weight="700">
-    for speed, SEO,
+  <text x="104" y="372" fill="#101828" font-family="Sora, Arial, sans-serif" font-size="60" font-weight="700">
+    built for speed,
   </text>
-  <text x="104" y="470" fill="#7C3AED" font-family="Sora, Arial, sans-serif" font-size="66" font-weight="700">
-    and AEO.
+  <text x="104" y="440" fill="#7C3AED" font-family="Sora, Arial, sans-serif" font-size="60" font-weight="700">
+    SEO, and AEO.
   </text>
-  <text x="104" y="536" fill="#526174" font-family="Manrope, Arial, sans-serif" font-size="28">
+  <text x="104" y="514" fill="#526174" font-family="Manrope, Arial, sans-serif" font-size="28">
     Static-first Astro template with starter presets, AI IDE docs,
   </text>
-  <text x="104" y="576" fill="#526174" font-family="Manrope, Arial, sans-serif" font-size="28">
+  <text x="104" y="554" fill="#526174" font-family="Manrope, Arial, sans-serif" font-size="28">
     structured content, and Vercel-ready deployment.
   </text>
-  <rect x="104" y="612" width="236" height="64" rx="32" fill="#7C3AED" />
-  <text x="222" y="652" text-anchor="middle" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">
+  <rect x="104" y="604" width="236" height="64" rx="32" fill="#7C3AED" />
+  <text x="222" y="644" text-anchor="middle" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">
     Use this template
   </text>
-  <rect x="358" y="612" width="236" height="64" rx="32" fill="#F3EDFF" stroke="#E7DCFF" />
-  <text x="476" y="652" text-anchor="middle" fill="#7C3AED" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">
+  <rect x="358" y="604" width="236" height="64" rx="32" fill="#F3EDFF" stroke="#E7DCFF" />
+  <text x="476" y="644" text-anchor="middle" fill="#7C3AED" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">
     Browse services
   </text>
-  <rect x="780" y="148" width="388" height="472" rx="32" fill="#FFFFFF" stroke="#E7DCFF" />
-  <rect x="812" y="184" width="188" height="18" rx="9" fill="#EEE7FF" />
-  <rect x="812" y="224" width="288" height="50" rx="16" fill="#FAF7FF" />
-  <rect x="812" y="296" width="288" height="50" rx="16" fill="#FAF7FF" />
-  <rect x="812" y="368" width="288" height="50" rx="16" fill="#FAF7FF" />
-  <rect x="812" y="440" width="288" height="100" rx="24" fill="#FAF7FF" />
-  <rect x="812" y="564" width="176" height="44" rx="22" fill="#7C3AED" />
-  <text x="868" y="592" text-anchor="middle" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="18" font-weight="700">
+  <rect x="846" y="148" width="322" height="472" rx="32" fill="#FFFFFF" stroke="#E7DCFF" />
+  <rect x="878" y="184" width="156" height="18" rx="9" fill="#EEE7FF" />
+  <rect x="878" y="224" width="224" height="50" rx="16" fill="#FAF7FF" />
+  <rect x="878" y="296" width="224" height="50" rx="16" fill="#FAF7FF" />
+  <rect x="878" y="368" width="224" height="50" rx="16" fill="#FAF7FF" />
+  <rect x="878" y="440" width="224" height="100" rx="24" fill="#FAF7FF" />
+  <rect x="878" y="564" width="176" height="44" rx="22" fill="#7C3AED" />
+  <text x="966" y="592" text-anchor="middle" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="18" font-weight="700">
     REST form ready
   </text>
 </svg>
