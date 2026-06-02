@@ -24,7 +24,7 @@ const navItems: NavItem[] = site.navigation.main.map((item) =>
 ---
 
 <nav
-  class="fixed inset-x-0 top-0 z-50 border-b border-border/70 bg-theme-default-body/90 py-4 backdrop-blur-md transition-colors duration-200 dark:border-darkmode-border/70 dark:bg-theme-darkmode-body/92"
+  class="fixed inset-x-0 top-0 z-50 border-b border-border/70 bg-body/90 py-4 backdrop-blur-md transition-colors duration-200 dark:border-darkmode-border/70 dark:bg-darkmode-body/92"
 >
   <div
     class="mx-auto flex max-w-7xl items-center justify-between px-6 md:px-10"
@@ -66,7 +66,7 @@ const navItems: NavItem[] = site.navigation.main.map((item) =>
 
             {item.children && (
               <div class="invisible absolute left-0 top-full w-64 pt-4 opacity-0 transition-colors duration-200 group-hover:visible group-hover:opacity-100">
-                <div class="overflow-hidden rounded-xl border border-border bg-theme-default-body p-2 shadow-2xl dark:border-darkmode-border dark:bg-theme-darkmode-body">
+                <div class="overflow-hidden rounded-xl border border-border bg-body p-2 shadow-2xl dark:border-darkmode-border dark:bg-darkmode-body">
                   {item.children.map((child) => (
                     <a
                       href={child.href}
@@ -112,7 +112,7 @@ const navItems: NavItem[] = site.navigation.main.map((item) =>
 
 <div
   id="mobile-navigation"
-  class="fixed inset-0 z-[60] overflow-y-auto bg-theme-default-body px-6 pt-24 transition-transform duration-300 ease-in-out dark:bg-theme-darkmode-body lg:hidden"
+  class="fixed inset-0 z-[60] overflow-y-auto bg-body px-6 pt-24 transition-transform duration-300 ease-in-out dark:bg-darkmode-body lg:hidden"
   style="transform: translateX(100%);"
   data-mobile-nav-panel
   inert
