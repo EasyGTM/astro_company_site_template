@@ -170,7 +170,7 @@ They define:
 This repo includes:
 
 - npm lockfile for reproducible installs
-- CI for lint, check, and build
+- local `npm run validate` checks for lint, check, and build
 - contributor docs and community files
 - issue and PR templates
 
