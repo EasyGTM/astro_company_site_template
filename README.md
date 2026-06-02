@@ -2,6 +2,10 @@
 
 A Vercel-first Astro starter for agencies, consultancies, studios, and other service businesses that want a polished marketing site with strong performance, SEO, and AEO defaults.
 
+## Live Demo
+
+[astro-company-site-template.vercel.app](https://astro-company-site-template.vercel.app/)
+
 ![Homepage preview](public/images/readme-home-preview.svg)
 
 ![Preset preview](public/images/readme-presets-preview.svg)

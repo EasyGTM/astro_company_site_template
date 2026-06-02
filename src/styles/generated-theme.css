@@ -6,20 +6,20 @@
 
 @theme {
   /* === Colors === */
-  --color-primary: #1f6fff;
-  --color-body: #f6f8fb;
-  --color-border: #dbe5f3;
-  --color-light: #edf3fb;
+  --color-primary: #7c3aed;
+  --color-body: #faf7ff;
+  --color-border: #e7dcff;
+  --color-light: #f3edff;
   --color-dark: #0f172a;
   --color-text: #526174;
   --color-text-dark: #101828;
   --color-text-light: #7a8699;
 
   /* === Darkmode Colors === */
-  --color-darkmode-primary: #4c8dff;
-  --color-darkmode-body: #09111f;
-  --color-darkmode-border: #1d3048;
-  --color-darkmode-light: #101b31;
+  --color-darkmode-primary: #a78bfa;
+  --color-darkmode-body: #0d0a18;
+  --color-darkmode-border: #2b2146;
+  --color-darkmode-light: #171128;
   --color-darkmode-dark: #ffffff;
   --color-darkmode-text: #c8d3e3;
   --color-darkmode-text-dark: #f8fbff;

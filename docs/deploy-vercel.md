@@ -14,6 +14,8 @@ This template is static-first and works well on Vercel.
 
 ## Demo deployment
 
+This template is live at [astro-company-site-template.vercel.app](https://astro-company-site-template.vercel.app/).
+
 For a public template demo, a free `.vercel.app` domain is enough. Use that URL in the README until you add a custom domain later.
 
 ## Before deploying
