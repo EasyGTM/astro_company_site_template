@@ -1,0 +1,60 @@
+---
+import Base from "@/layouts/Base.astro";
+import faqs from "@/data/faqs.json";
+import { absoluteUrl, buildBreadcrumbSchema } from "@/lib/site";
+
+const schema = [
+  buildBreadcrumbSchema([
+    { name: "Home", item: absoluteUrl("/") },
+    { name: "FAQ", item: absoluteUrl("/faq") },
+  ]),
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  },
+];
+---
+
+<Base
+  title="FAQ"
+  description="Common questions about the services company template, including editing model, SEO/AEO defaults, and deployment options."
+  schema={schema}
+>
+  <section class="section pt-36">
+    <div class="container max-w-4xl">
+      <div class="fade-in-section text-center">
+        <span class="eyebrow">FAQ</span>
+        <h1 class="type-h1 mt-4">
+          Questions teams usually ask before they fork the template.
+        </h1>
+        <p class="type-lead mt-6">
+          The short answer is that most customization happens in content and
+          config files, not page components.
+        </p>
+      </div>
+      <div class="mt-14 space-y-4">
+        {
+          faqs.map((faq, index) => (
+            <details
+              class="fade-in-section rounded-[1.5rem] border border-border bg-white px-6 py-5 dark:border-darkmode-border dark:bg-theme-darkmode-body"
+              style={`transition-delay:${index * 70}ms`}
+            >
+              <summary class="cursor-pointer list-none font-bold text-text-dark dark:text-darkmode-text-dark">
+                {faq.question}
+              </summary>
+              <p class="type-body mt-4">{faq.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>

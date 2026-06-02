@@ -1,0 +1,77 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "@/layouts/Base.astro";
+import dateFormat from "@/lib/utils/dateFormat";
+import { absoluteUrl, buildBreadcrumbSchema, site } from "@/lib/site";
+
+export async function getStaticPaths() {
+  const insights = await getCollection("insights", ({ data }) => !data.draft);
+  return insights.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const articleUrl = absoluteUrl(`/insights/${post.id}`);
+
+const schema = [
+  buildBreadcrumbSchema([
+    { name: "Home", item: absoluteUrl("/") },
+    { name: "Insights", item: absoluteUrl("/insights") },
+    { name: post.data.title, item: articleUrl },
+  ]),
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.data.title,
+    description: post.data.description,
+    datePublished: post.data.date.toISOString(),
+    dateModified: post.data.date.toISOString(),
+    author: {
+      "@type": "Organization",
+      name: post.data.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: site.company.name,
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl(site.site.logo),
+      },
+    },
+    image: post.data.image
+      ? absoluteUrl(post.data.image)
+      : absoluteUrl(site.seo.default_image),
+    mainEntityOfPage: articleUrl,
+  },
+];
+---
+
+<Base
+  title={post.data.title}
+  meta_title={post.data.meta_title}
+  description={post.data.description}
+  image={post.data.image}
+  noindex={post.data.noindex}
+  schema={schema}
+>
+  <section class="section pt-36">
+    <div class="container max-w-4xl">
+      <div class="fade-in-section text-center">
+        <span class="eyebrow">{post.data.categories[0]}</span>
+        <h1 class="type-h1 mt-4">{post.data.title}</h1>
+        <p class="type-lead mt-6">{post.data.description}</p>
+        <p
+          class="mt-6 text-sm font-bold uppercase tracking-widest text-text-light dark:text-darkmode-text-light"
+        >
+          {dateFormat(post.data.date)} • {post.data.author}
+        </p>
+      </div>
+      <article class="content mt-14 fade-in-section">
+        <Content />
+      </article>
+    </div>
+  </section>
+</Base>

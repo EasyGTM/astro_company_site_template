@@ -1,0 +1,235 @@
+---
+import Navbar from "@/components/global/Navbar.astro";
+import Footer from "@/components/global/Footer.astro";
+import { getServices } from "@/lib/content";
+import {
+  absoluteUrl,
+  buildOrganizationSchema,
+  buildTitle,
+  buildWebsiteSchema,
+  site,
+} from "@/lib/site";
+import { plainify } from "@/lib/utils/textConverter";
+import "@/styles/main.css";
+
+export interface Props {
+  title?: string;
+  meta_title?: string;
+  description?: string;
+  image?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  canonical?: string;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  meta_title,
+  description,
+  image,
+  ogImage,
+  noindex,
+  canonical,
+  schema,
+} = Astro.props;
+const services = await getServices();
+const canonicalUrl =
+  canonical || new URL(Astro.url.pathname, site.site.base_url).toString();
+const pageTitle = plainify(buildTitle(title, meta_title));
+const pageDescription = plainify(description || site.seo.default_description);
+const metaImage = absoluteUrl(ogImage || image || site.seo.default_image);
+const globalSchema = [buildOrganizationSchema(), buildWebsiteSchema()];
+const pageSchema = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+const schemaJson = JSON.stringify([...globalSchema, ...pageSchema]);
+---
+
+<!doctype html>
+<html lang={site.site.locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=5"
+    />
+    <link rel="shortcut icon" href={site.site.favicon} />
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.bunny.net/css?family=manrope:400,500,600,700,800|sora:400,600,700,800&display=swap"
+    />
+    <meta name="msapplication-TileColor" content="#1f6fff" />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#1f6fff"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#09111f"
+    />
+    <title>{pageTitle}</title>
+    <link rel="canonical" href={canonicalUrl} itemprop="url" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" />
+    {
+      noindex ? (
+        <meta name="robots" content="noindex,nofollow" />
+      ) : (
+        <meta name="robots" content={site.seo.robots} />
+      )
+    }
+    <meta name="description" content={pageDescription} />
+    <meta name="author" content={site.seo.meta_author} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={metaImage} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={metaImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline type="application/ld+json" set:html={schemaJson} />
+    <script
+      is:inline
+      define:vars={{ defaultTheme: site.settings.default_theme }}
+    >
+      (() => {
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+        const preferredTheme =
+          defaultTheme === "system"
+            ? systemTheme.matches
+              ? "dark"
+              : "light"
+            : defaultTheme;
+        const activeTheme = localStorage.getItem("theme") || preferredTheme;
+        document.documentElement.classList.toggle(
+          "dark",
+          activeTheme === "dark",
+        );
+      })();
+    </script>
+  </head>
+  <body
+    class="bg-theme-default-body text-theme-default-text dark:bg-theme-darkmode-body dark:text-theme-darkmode-text"
+  >
+    <div
+      class="fixed inset-0 -z-50 pointer-events-none overflow-hidden opacity-80 dark:opacity-35"
+    >
+      <div
+        class="absolute -left-20 top-0 h-[26rem] w-[26rem] rounded-full bg-primary/12 blur-3xl"
+      >
+      </div>
+      <div
+        class="absolute right-0 top-1/3 h-[20rem] w-[20rem] rounded-full bg-sky-200/40 blur-3xl dark:bg-primary/16"
+      >
+      </div>
+      <div
+        class="absolute bottom-0 left-1/3 h-[18rem] w-[18rem] rounded-full bg-white/70 blur-3xl dark:bg-white/4"
+      >
+      </div>
+    </div>
+
+    <Navbar services={services} />
+    <main id="main-content" class="min-h-screen">
+      <slot />
+    </main>
+    <Footer />
+
+    <script
+      is:inline
+      define:vars={{ defaultTheme: site.settings.default_theme }}
+    >
+      (() => {
+        if (window.__themeSwitcherInitialized) {
+          document.dispatchEvent(new CustomEvent("theme:sync"));
+          return;
+        }
+
+        window.__themeSwitcherInitialized = true;
+
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+        const getPreferredTheme = () =>
+          defaultTheme === "system"
+            ? systemTheme.matches
+              ? "dark"
+              : "light"
+            : defaultTheme;
+        const getActiveTheme = () =>
+          localStorage.getItem("theme") || getPreferredTheme();
+
+        const syncThemeSwitchers = () => {
+          const isDarkTheme = getActiveTheme() === "dark";
+          document.documentElement.classList.toggle("dark", isDarkTheme);
+          document
+            .querySelectorAll("[data-theme-switcher]")
+            .forEach((element) => {
+              if (element instanceof HTMLInputElement) {
+                element.checked = isDarkTheme;
+              }
+            });
+        };
+
+        document.addEventListener("change", (event) => {
+          const target = event.target;
+          if (!(target instanceof HTMLInputElement)) return;
+          if (!target.matches("[data-theme-switcher]")) return;
+          localStorage.setItem("theme", target.checked ? "dark" : "light");
+          syncThemeSwitchers();
+        });
+
+        document.addEventListener("theme:sync", syncThemeSwitchers);
+        document.addEventListener("astro:after-swap", syncThemeSwitchers);
+
+        const handleSystemThemeChange = () => {
+          if (!localStorage.getItem("theme")) {
+            syncThemeSwitchers();
+          }
+        };
+
+        systemTheme.addEventListener("change", handleSystemThemeChange);
+
+        syncThemeSwitchers();
+      })();
+    </script>
+
+    <script is:inline>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+            }
+          });
+        },
+        { threshold: 0.15 },
+      );
+
+      const observeFadeSections = () => {
+        document.querySelectorAll(".fade-in-section").forEach((element) => {
+          observer.observe(element);
+        });
+      };
+
+      observeFadeSections();
+      document.addEventListener("astro:after-swap", observeFadeSections);
+    </script>
+
+    <style is:global>
+      .fade-in-section {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+
+      .fade-in-section.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </body>
+</html>

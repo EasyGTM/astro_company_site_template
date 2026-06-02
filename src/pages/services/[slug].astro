@@ -1,0 +1,126 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "@/layouts/Base.astro";
+import { absoluteUrl, buildBreadcrumbSchema, site } from "@/lib/site";
+
+export async function getStaticPaths() {
+  const services = await getCollection("services", ({ data }) => !data.draft);
+  return services.map((service) => ({
+    params: { slug: service.id },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const { Content } = await render(service);
+const serviceUrl = absoluteUrl(`/services/${service.id}`);
+
+const schema = [
+  buildBreadcrumbSchema([
+    { name: "Home", item: absoluteUrl("/") },
+    { name: "Services", item: absoluteUrl("/services") },
+    { name: service.data.title, item: serviceUrl },
+  ]),
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.data.title,
+    serviceType: service.data.category,
+    description: service.data.description,
+    provider: {
+      "@type": "Organization",
+      name: site.company.name,
+      url: site.site.base_url,
+    },
+    areaServed: site.company.areas_served,
+    url: serviceUrl,
+  },
+];
+---
+
+<Base
+  title={service.data.title}
+  meta_title={service.data.meta_title}
+  description={service.data.description}
+  image={service.data.image}
+  schema={schema}
+>
+  <section class="section pt-36">
+    <div class="container">
+      <div class="grid gap-10 lg:grid-cols-[1fr_0.75fr] lg:items-start">
+        <div class="fade-in-section">
+          <span class="eyebrow">{service.data.category}</span>
+          <h1 class="type-h1 mt-4">{service.data.title}</h1>
+          <p class="type-lead mt-6 max-w-3xl">{service.data.summary}</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            {
+              service.data.outcomes.map((outcome) => (
+                <span class="rounded-full border border-border bg-white/70 px-4 py-2 text-sm text-text dark:border-darkmode-border dark:bg-darkmode-light/70 dark:text-darkmode-text">
+                  {outcome}
+                </span>
+              ))
+            }
+          </div>
+        </div>
+
+        <aside
+          class="fade-in-section rounded-[2rem] border border-border bg-white/90 p-8 shadow-[0_24px_80px_rgba(16,24,40,0.06)] dark:border-darkmode-border dark:bg-theme-darkmode-body/90"
+        >
+          <div class="space-y-6">
+            <div>
+              <p
+                class="text-sm font-bold uppercase tracking-widest text-text-dark dark:text-darkmode-text-dark"
+              >
+                Timeline
+              </p>
+              <p class="mt-2 text-text dark:text-darkmode-text">
+                {service.data.timeline}
+              </p>
+            </div>
+            <div>
+              <p
+                class="text-sm font-bold uppercase tracking-widest text-text-dark dark:text-darkmode-text-dark"
+              >
+                Engagement model
+              </p>
+              <p class="mt-2 text-text dark:text-darkmode-text">
+                {service.data.engagement_model}
+              </p>
+            </div>
+            <div>
+              <p
+                class="text-sm font-bold uppercase tracking-widest text-text-dark dark:text-darkmode-text-dark"
+              >
+                Good fit for
+              </p>
+              <ul class="mt-3 space-y-2 text-text dark:text-darkmode-text">
+                {service.data.ideal_for.map((item) => <li>• {item}</li>)}
+              </ul>
+            </div>
+            <a href="/contact" class="btn btn-primary-cta w-full text-center"
+              >Talk through the scope</a
+            >
+          </div>
+        </aside>
+      </div>
+
+      <div class="mt-16 grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+        <div
+          class="fade-in-section rounded-[1.75rem] border border-border bg-light/70 p-8 dark:border-darkmode-border dark:bg-darkmode-light/70"
+        >
+          <h2 class="type-h3 mb-6">What’s included</h2>
+          <ul class="space-y-3 text-text dark:text-darkmode-text">
+            {
+              service.data.deliverables.map((deliverable) => (
+                <li>• {deliverable}</li>
+              ))
+            }
+          </ul>
+        </div>
+        <div class="content fade-in-section">
+          <Content />
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

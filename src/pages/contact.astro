@@ -1,0 +1,191 @@
+---
+import Base from "@/layouts/Base.astro";
+import { absoluteUrl, buildBreadcrumbSchema, site } from "@/lib/site";
+
+const schema = buildBreadcrumbSchema([
+  { name: "Home", item: absoluteUrl("/") },
+  { name: "Contact", item: absoluteUrl("/contact") },
+]);
+
+const formIsLive =
+  site.form.mode === "rest" && site.form.endpoint.trim().length > 0;
+---
+
+<Base
+  title="Contact"
+  description="A generic contact page with a configurable REST form adapter. Replace the demo settings in src/data/site.json to connect it to your API."
+  schema={schema}
+>
+  <section class="section pt-36">
+    <div class="container">
+      <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+        <div class="fade-in-section">
+          <span class="eyebrow">Contact</span>
+          <h1 class="type-h1 mt-4">
+            Use the demo form or connect your own endpoint.
+          </h1>
+          <p class="type-lead mt-6">
+            This template does not ship with a backend. Update
+            `src/data/site.json` with your REST API details or adapt the
+            client-side submit handler to your preferred provider.
+          </p>
+          <div
+            class="mt-10 rounded-[1.75rem] border border-border bg-white/80 p-8 dark:border-darkmode-border dark:bg-darkmode-light/80"
+          >
+            <p class="font-bold text-text-dark dark:text-darkmode-text-dark">
+              {site.company.name}
+            </p>
+            <p class="mt-3 text-text dark:text-darkmode-text">
+              {site.company.location}
+            </p>
+            <p class="mt-3">
+              <a href={`mailto:${site.company.email}`} class="text-primary"
+                >{site.company.email}</a
+              >
+            </p>
+            <p class="mt-2">
+              <a href={`tel:${site.company.phone}`} class="text-primary"
+                >{site.company.phone}</a
+              >
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="fade-in-section rounded-[2rem] border border-border bg-white p-8 shadow-[0_24px_80px_rgba(16,24,40,0.06)] dark:border-darkmode-border dark:bg-theme-darkmode-body"
+        >
+          <div
+            class="mb-8 rounded-2xl border border-border bg-light/70 px-5 py-4 text-sm dark:border-darkmode-border dark:bg-darkmode-light/70"
+          >
+            <p class="font-bold text-text-dark dark:text-darkmode-text-dark">
+              {formIsLive ? "REST endpoint configured" : "Demo mode enabled"}
+            </p>
+            <p class="mt-2 text-text dark:text-darkmode-text">
+              {
+                formIsLive
+                  ? "The form will POST JSON to the configured endpoint."
+                  : "Set `form.mode` to `rest` and add `form.endpoint` in `src/data/site.json` to make this form live."
+              }
+            </p>
+          </div>
+
+          <form id="contact-form" class="space-y-5">
+            <div class="grid gap-5 md:grid-cols-2">
+              <label class="block">
+                <span
+                  class="mb-2 block text-sm font-bold uppercase tracking-widest text-text-dark dark:text-darkmode-text-dark"
+                  >Name</span
+                >
+                <input
+                  name="name"
+                  required
+                  class="w-full rounded-2xl border border-border bg-theme-default-body px-4 py-3 dark:border-darkmode-border dark:bg-darkmode-light"
+                />
+              </label>
+              <label class="block">
+                <span
+                  class="mb-2 block text-sm font-bold uppercase tracking-widest text-text-dark dark:text-darkmode-text-dark"
+                  >Email</span
+                >
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  class="w-full rounded-2xl border border-border bg-theme-default-body px-4 py-3 dark:border-darkmode-border dark:bg-darkmode-light"
+                />
+              </label>
+            </div>
+            <div class="grid gap-5 md:grid-cols-2">
+              <label class="block">
+                <span
+                  class="mb-2 block text-sm font-bold uppercase tracking-widest text-text-dark dark:text-darkmode-text-dark"
+                  >Company</span
+                >
+                <input
+                  name="company"
+                  class="w-full rounded-2xl border border-border bg-theme-default-body px-4 py-3 dark:border-darkmode-border dark:bg-darkmode-light"
+                />
+              </label>
+              <label class="block">
+                <span
+                  class="mb-2 block text-sm font-bold uppercase tracking-widest text-text-dark dark:text-darkmode-text-dark"
+                  >Website</span
+                >
+                <input
+                  name="website"
+                  class="w-full rounded-2xl border border-border bg-theme-default-body px-4 py-3 dark:border-darkmode-border dark:bg-darkmode-light"
+                />
+              </label>
+            </div>
+            <label class="block">
+              <span
+                class="mb-2 block text-sm font-bold uppercase tracking-widest text-text-dark dark:text-darkmode-text-dark"
+                >Project details</span
+              >
+              <textarea
+                name="message"
+                rows="6"
+                required
+                class="w-full rounded-2xl border border-border bg-theme-default-body px-4 py-3 dark:border-darkmode-border dark:bg-darkmode-light"
+                placeholder="Describe your offer, timeline, and the outcome you want from the site."
+              ></textarea>
+            </label>
+            <button
+              type="submit"
+              class="btn btn-primary-cta"
+              disabled={!formIsLive}
+            >
+              {formIsLive ? "Send message" : "Connect endpoint first"}
+            </button>
+            <p
+              id="contact-form-status"
+              class="text-sm text-text dark:text-darkmode-text"
+              aria-live="polite"
+            >
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline define:vars={{ formConfig: site.form }}>
+    const form = document.getElementById("contact-form");
+    const status = document.getElementById("contact-form-status");
+
+    if (form && status) {
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        if (formConfig.mode !== "rest" || !formConfig.endpoint) {
+          status.textContent = formConfig.errorMessage;
+          return;
+        }
+
+        const formData = new FormData(form);
+        const payload = Object.fromEntries(formData.entries());
+
+        status.textContent = "Sending...";
+
+        try {
+          const response = await fetch(formConfig.endpoint, {
+            method: formConfig.method || "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+
+          if (!response.ok) {
+            throw new Error("Request failed");
+          }
+
+          status.textContent = formConfig.successMessage;
+          form.reset();
+        } catch (error) {
+          status.textContent = formConfig.errorMessage;
+        }
+      });
+    }
+  </script>
+</Base>

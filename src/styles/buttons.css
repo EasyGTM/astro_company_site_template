@@ -1,0 +1,23 @@
+.btn {
+  @apply inline-block rounded-full border border-[1px] px-8 py-3 text-[13px] font-bold uppercase leading-[1.2] tracking-widest transition-colors duration-200;
+}
+
+.btn-sm {
+  @apply rounded-sm px-4 py-1.5 text-sm;
+}
+
+.btn-primary {
+  @apply border-primary bg-primary text-white hover:border-text-dark hover:bg-text-dark hover:text-white dark:hover:border-darkmode-text-dark dark:hover:bg-darkmode-text-dark dark:hover:text-darkmode-body;
+}
+
+.btn-primary-cta {
+  @apply border-text-dark bg-text-dark text-white hover:border-primary hover:bg-primary hover:text-white dark:border-darkmode-text-dark dark:bg-darkmode-text-dark dark:text-darkmode-body dark:hover:border-darkmode-primary dark:hover:bg-darkmode-primary dark:hover:text-white;
+}
+
+.btn-secondary-cta {
+  @apply border-light bg-light text-text-dark hover:border-primary hover:bg-primary hover:text-white dark:border-darkmode-light dark:bg-darkmode-light dark:text-darkmode-text-dark dark:hover:border-darkmode-primary dark:hover:bg-darkmode-primary dark:hover:text-white;
+}
+
+.btn-outline-primary {
+  @apply border-primary bg-transparent text-primary hover:bg-primary hover:text-white dark:border-darkmode-primary dark:text-darkmode-primary dark:hover:bg-darkmode-primary dark:hover:text-white;
+}

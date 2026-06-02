@@ -1,0 +1,72 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getInsights } from "@/lib/content";
+import { absoluteUrl, buildBreadcrumbSchema } from "@/lib/site";
+
+const insights = await getInsights();
+const categories = [
+  ...new Set(insights.flatMap((post) => post.data.categories)),
+];
+
+const schema = buildBreadcrumbSchema([
+  { name: "Home", item: absoluteUrl("/") },
+  { name: "Insights", item: absoluteUrl("/insights") },
+]);
+---
+
+<Base
+  title="Insights"
+  description="Demo articles written for both classic SEO and answer-engine retrieval. Replace them with your own expertise or use them as formatting references."
+  schema={schema}
+>
+  <section class="section pt-36 pb-12">
+    <div class="container text-center max-w-5xl mx-auto">
+      <div class="fade-in-section">
+        <span class="eyebrow">Insights</span>
+        <h1 class="type-h1 mt-4">
+          Content examples built to answer real questions clearly.
+        </h1>
+        <p class="type-lead mt-6">
+          The demo articles use answer-first intros, strong heading hierarchy,
+          structured lists, and topic clustering so the content works for
+          people, search engines, and AI tools.
+        </p>
+      </div>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        {
+          categories.map((category) => (
+            <span class="rounded-full border border-border bg-white/70 px-4 py-2 text-sm text-text dark:border-darkmode-border dark:bg-darkmode-light/70 dark:text-darkmode-text">
+              {category}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section py-16 bg-light/60 dark:bg-darkmode-light/60">
+    <div class="container">
+      <div class="grid gap-6 lg:grid-cols-3">
+        {
+          insights.map((post, index) => (
+            <article
+              class="fade-in-section rounded-[1.75rem] border border-border bg-white/85 p-8 dark:border-darkmode-border dark:bg-theme-darkmode-body/85"
+              style={`transition-delay:${index * 75}ms`}
+            >
+              <span class="eyebrow">{post.data.categories[0]}</span>
+              <h2 class="type-h3 mt-4">{post.data.title}</h2>
+              <p class="type-body mt-4">{post.data.description}</p>
+              <a
+                href={`/insights/${post.id}`}
+                class="mt-8 inline-flex items-center gap-2 font-bold uppercase tracking-widest text-sm text-primary"
+              >
+                Read insight
+                <span aria-hidden="true">→</span>
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>

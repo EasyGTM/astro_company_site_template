@@ -1,0 +1,26 @@
+[
+  {
+    "question": "Who is this template for?",
+    "answer": "It is designed for agencies, consultancies, studios, and other service businesses that want a fast marketing site with clear content editing surfaces."
+  },
+  {
+    "question": "Where do I change the company name, links, and default SEO settings?",
+    "answer": "Update src/data/site.json. It centralizes brand identity, navigation, contact details, CTAs, social links, form configuration, and global SEO defaults."
+  },
+  {
+    "question": "How do I edit services, case studies, and insights?",
+    "answer": "Services, work examples, and insight articles live in content collections under src/content. Most content changes do not require touching Astro components."
+  },
+  {
+    "question": "Does the contact form need a backend?",
+    "answer": "The template does not ship with one. You can keep the demo disabled state or point the form to your own REST endpoint from src/data/site.json."
+  },
+  {
+    "question": "Is this template SEO and AEO friendly out of the box?",
+    "answer": "Yes. It includes structured data, canonical handling, llms.txt, sitemap integration, answer-first content examples, and collection-level metadata fields."
+  },
+  {
+    "question": "Can I deploy this to Netlify or Vercel?",
+    "answer": "Yes. The template is Astro static output by default, so it can be deployed to Netlify, Vercel, Cloudflare Pages, or any static host."
+  }
+]

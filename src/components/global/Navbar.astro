@@ -1,0 +1,208 @@
+---
+import Logo from "@/components/Logo.astro";
+import ThemeSwitcher from "@/components/ThemeSwitcher.astro";
+import type { ServiceEntry } from "@/lib/content";
+import { site } from "@/lib/site";
+
+type NavChild = { name: string; href: string };
+type NavItem = { name: string; url: string; children?: NavChild[] };
+
+const { services = [] }: { services?: ServiceEntry[] } = Astro.props;
+
+const navItems: NavItem[] = site.navigation.main.map((item) =>
+  item.url === "/services"
+    ? {
+        ...item,
+        children: services.map((service) => ({
+          name: service.data.short_title,
+          href: `/services/${service.id}`,
+        })),
+      }
+    : item,
+);
+---
+
+<nav
+  class="fixed inset-x-0 top-0 z-50 border-b border-border/70 bg-theme-default-body/90 py-4 backdrop-blur-md transition-colors duration-200 dark:border-darkmode-border/70 dark:bg-theme-darkmode-body/92"
+>
+  <div
+    class="mx-auto flex max-w-7xl items-center justify-between px-6 md:px-10"
+  >
+    <div class="relative z-50">
+      <Logo />
+    </div>
+
+    <div class="hidden items-center gap-8 lg:flex">
+      {
+        navItems.map((item) => (
+          <div class="group relative flex h-full items-center">
+            <a
+              href={item.url}
+              class="flex items-center gap-1 py-2 text-sm font-bold uppercase tracking-widest text-text transition-colors duration-200 hover:text-primary dark:text-darkmode-text dark:hover:text-darkmode-primary"
+            >
+              {item.name}
+              {item.children && (
+                <svg
+                  class="h-3.5 w-3.5 transition-transform duration-200 group-hover:rotate-180"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="m6 9 6 6 6-6"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              )}
+            </a>
+
+            {item.children && (
+              <div class="invisible absolute left-0 top-full w-64 pt-4 opacity-0 transition-colors duration-200 group-hover:visible group-hover:opacity-100">
+                <div class="overflow-hidden rounded-xl border border-border bg-theme-default-body p-2 shadow-2xl dark:border-darkmode-border dark:bg-theme-darkmode-body">
+                  {item.children.map((child) => (
+                    <a
+                      href={child.href}
+                      class="block rounded-lg px-4 py-3 text-sm text-text transition-colors duration-200 hover:bg-light hover:text-primary dark:text-darkmode-text dark:hover:bg-darkmode-light dark:hover:text-darkmode-primary"
+                    >
+                      {child.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        ))
+      }
+      <ThemeSwitcher className="mr-2" />
+      <a href={site.cta.link} class="btn btn-primary-cta ml-4"
+        >{site.cta.label}</a
+      >
+    </div>
+
+    <button
+      type="button"
+      class="relative z-50 flex h-11 w-11 cursor-pointer items-center justify-center text-text-dark dark:text-darkmode-text-dark lg:hidden"
+      data-mobile-nav-open
+      aria-label="Open navigation"
+      aria-controls="mobile-navigation"
+      aria-expanded="false"
+    >
+      <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none">
+        <path
+          d="M4 6h16M4 12h16M4 18h16"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"></path>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<div
+  id="mobile-navigation"
+  class="fixed inset-0 z-[60] overflow-y-auto bg-theme-default-body px-6 pt-24 transition-transform duration-300 ease-in-out dark:bg-theme-darkmode-body lg:hidden"
+  style="transform: translateX(100%);"
+  data-mobile-nav-panel
+  inert
+>
+  <button
+    type="button"
+    class="absolute right-6 top-5 flex h-11 w-11 cursor-pointer items-center justify-center text-text-dark dark:text-darkmode-text-dark"
+    data-mobile-nav-close
+    aria-label="Close navigation"
+  >
+    <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M18 6 6 18M6 6l12 12"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"></path>
+    </svg>
+  </button>
+
+  <div class="flex flex-col gap-6">
+    {
+      navItems.map((item) => (
+        <div class="border-b border-border/70 pb-4 last:border-0 dark:border-darkmode-border/60">
+          <a
+            href={item.url}
+            class="mb-2 block text-2xl font-bold uppercase tracking-tight text-text-dark dark:text-darkmode-text-dark"
+          >
+            {item.name}
+          </a>
+          {item.children && (
+            <div class="mt-2 flex flex-col gap-3 border-l-2 border-border pl-4 dark:border-darkmode-border">
+              {item.children.map((child) => (
+                <a
+                  href={child.href}
+                  class="text-base text-text dark:text-darkmode-text"
+                >
+                  {child.name}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      ))
+    }
+    <div class="flex items-center gap-4 pb-10 pt-4">
+      <ThemeSwitcher />
+      <a
+        href={site.cta.link}
+        class="btn btn-primary-cta w-full justify-center text-center"
+        >{site.cta.label}</a
+      >
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    const initMobileNav = () => {
+      const openButton = document.querySelector("[data-mobile-nav-open]");
+      const closeButton = document.querySelector("[data-mobile-nav-close]");
+      const panel = document.querySelector("[data-mobile-nav-panel]");
+
+      if (!openButton || !closeButton || !panel) return;
+
+      const setOpen = (isOpen) => {
+        panel.style.transform = isOpen ? "translateX(0)" : "translateX(100%)";
+        panel.toggleAttribute("inert", !isOpen);
+        panel.setAttribute("aria-hidden", String(!isOpen));
+        openButton.setAttribute("aria-expanded", String(isOpen));
+        document.documentElement.classList.toggle("overflow-hidden", isOpen);
+        document.body.classList.toggle("overflow-hidden", isOpen);
+      };
+
+      setOpen(false);
+
+      if (panel.dataset.mobileNavBound === "true") return;
+      panel.dataset.mobileNavBound = "true";
+
+      openButton.addEventListener("click", () => setOpen(true));
+      closeButton.addEventListener("click", () => setOpen(false));
+
+      panel.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => setOpen(false));
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") setOpen(false);
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth >= 1024) setOpen(false);
+      });
+    };
+
+    if (!window.__mobileNavInitialized) {
+      window.__mobileNavInitialized = true;
+      document.addEventListener("astro:after-swap", initMobileNav);
+    }
+
+    initMobileNav();
+  })();
+</script>

@@ -1,0 +1,69 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getWork } from "@/lib/content";
+import { absoluteUrl, buildBreadcrumbSchema } from "@/lib/site";
+
+const work = await getWork();
+
+const schema = buildBreadcrumbSchema([
+  { name: "Home", item: absoluteUrl("/") },
+  { name: "Work", item: absoluteUrl("/work") },
+]);
+---
+
+<Base
+  title="Work"
+  description="Demo case studies for a strategy and growth partner. Swap the Markdown entries in src/content/work with your own proof."
+  schema={schema}
+>
+  <section class="section pt-36">
+    <div class="container">
+      <div class="fade-in-section max-w-4xl">
+        <span class="eyebrow">Work</span>
+        <h1 class="type-h1 mt-4">
+          Case studies that show outcomes, not just activity.
+        </h1>
+        <p class="type-lead mt-6">
+          Each case study combines structured frontmatter with narrative body
+          copy so teams can publish proof that works for both human readers and
+          answer engines.
+        </p>
+      </div>
+
+      <div class="mt-14 grid gap-8 lg:grid-cols-3">
+        {
+          work.map((entry, index) => (
+            <article
+              class="fade-in-section overflow-hidden rounded-[1.75rem] border border-border bg-white shadow-[0_24px_80px_rgba(16,24,40,0.06)] dark:border-darkmode-border dark:bg-theme-darkmode-body"
+              style={`transition-delay:${index * 75}ms`}
+            >
+              <img
+                src={entry.data.image}
+                alt={entry.data.title}
+                class="h-52 w-full object-cover"
+                loading="lazy"
+              />
+              <div class="p-8">
+                <span class="eyebrow">{entry.data.sector}</span>
+                <h2 class="type-h3 mt-4">{entry.data.title}</h2>
+                <p class="type-body mt-4">{entry.data.description}</p>
+                <ul class="mt-6 space-y-2 text-sm text-text dark:text-darkmode-text">
+                  {entry.data.results.slice(0, 3).map((result) => (
+                    <li>• {result}</li>
+                  ))}
+                </ul>
+                <a
+                  href={`/work/${entry.id}`}
+                  class="mt-8 inline-flex items-center gap-2 font-bold uppercase tracking-widest text-sm text-primary"
+                >
+                  Read the case study
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>

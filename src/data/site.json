@@ -1,0 +1,141 @@
+{
+  "site": {
+    "name": "Skynet",
+    "title": "Skynet | Services Company Template",
+    "base_url": "https://skynet.example",
+    "base_path": "/",
+    "trailing_slash": false,
+    "locale": "en-US",
+    "favicon": "/images/favicon.svg",
+    "logo": "/images/logo.svg",
+    "logo_darkmode": "/images/logo-dark.svg",
+    "logo_width": "172",
+    "logo_height": "40",
+    "logo_text": "Skynet"
+  },
+  "company": {
+    "name": "Skynet",
+    "legal_name": "Skynet LLC",
+    "tagline": "Launch faster with a service website built for clarity, proof, and conversion.",
+    "description": "Skynet is the demo company shipped with this template. It shows how a modern services firm can package positioning, proof, and content into a fast, easy-to-rebrand site.",
+    "email": "hello@skynet.example",
+    "phone": "+1 (555) 010-2026",
+    "location": "Remote-first, serving North America and Europe",
+    "founding_date": "2026",
+    "areas_served": ["US", "CA", "GB", "DE", "NL"],
+    "same_as": [
+      "https://www.linkedin.com/company/skynet-template",
+      "https://github.com/skynet-template"
+    ]
+  },
+  "settings": {
+    "search": false,
+    "sticky_header": true,
+    "theme_switcher": true,
+    "default_theme": "system",
+    "pagination": 6,
+    "summary_length": 180
+  },
+  "seo": {
+    "default_title": "Skynet | Services Company Template",
+    "title_template": "%s | Skynet",
+    "meta_author": "Skynet",
+    "default_description": "A fast Astro template for agencies, consultancies, and service firms that care about performance, SEO, and answer-engine visibility.",
+    "default_image": "/images/og-template.svg",
+    "robots": "index,follow",
+    "robots_txt": {
+      "rules": [
+        {
+          "userAgent": "*",
+          "allow": ["/"],
+          "disallow": []
+        }
+      ],
+      "sitemaps": ["/sitemap-index.xml"]
+    },
+    "sitemap_exclude": []
+  },
+  "llms": {
+    "purpose": "Skynet uses this site to explain its services, show proof of work, publish insights, and capture new inquiries through a configurable contact flow.",
+    "routes": [
+      { "label": "Home", "url": "/" },
+      { "label": "Services", "url": "/services" },
+      { "label": "Work", "url": "/work" },
+      { "label": "Insights", "url": "/insights" },
+      { "label": "Process", "url": "/process" },
+      { "label": "About", "url": "/about" },
+      { "label": "Contact", "url": "/contact" }
+    ],
+    "notes": [
+      "Content is written in an answer-first style with clear headings and scannable sections.",
+      "Services, work, and insights live in structured content collections.",
+      "Organization, service, article, FAQ, and breadcrumb schema may appear when relevant."
+    ]
+  },
+  "aeo": {
+    "enabled": true,
+    "summary_style": "answer-first",
+    "content_notes": [
+      "Lead with the direct answer before supporting detail.",
+      "Use clear heading hierarchy and scannable lists.",
+      "Keep definitions, checklists, and FAQs easy to extract."
+    ]
+  },
+  "navigation": {
+    "main": [
+      { "name": "Home", "url": "/" },
+      { "name": "Services", "url": "/services" },
+      { "name": "Work", "url": "/work" },
+      { "name": "Insights", "url": "/insights" },
+      { "name": "Process", "url": "/process" },
+      { "name": "About", "url": "/about" }
+    ],
+    "footer": [
+      { "name": "Home", "url": "/" },
+      { "name": "Services", "url": "/services" },
+      { "name": "Work", "url": "/work" },
+      { "name": "Insights", "url": "/insights" },
+      { "name": "Process", "url": "/process" },
+      { "name": "About", "url": "/about" },
+      { "name": "FAQ", "url": "/faq" },
+      { "name": "Contact", "url": "/contact" },
+      { "name": "Privacy Policy", "url": "/privacy-policy" },
+      { "name": "Terms of Service", "url": "/terms-of-service" }
+    ]
+  },
+  "cta": {
+    "label": "Start a project",
+    "link": "/contact"
+  },
+  "footer": {
+    "headline": "Build a services website that feels fast, credible, and easy to customize.",
+    "subheadline": "This demo ships with content collections, structured data, AEO-friendly copy patterns, and configurable contact handling.",
+    "copyright": "© 2026 Skynet. Replace with your company name. | [Privacy Policy](/privacy-policy) | [Terms of Service](/terms-of-service)"
+  },
+  "social": {
+    "main": [
+      {
+        "name": "LinkedIn",
+        "icon": "FaLinkedinIn",
+        "link": "https://www.linkedin.com/company/skynet-template"
+      },
+      {
+        "name": "GitHub",
+        "icon": "FaGithub",
+        "link": "https://github.com/skynet-template"
+      },
+      {
+        "name": "X",
+        "icon": "FaXTwitter",
+        "link": "https://x.com/skynettemplate"
+      }
+    ]
+  },
+  "form": {
+    "mode": "disabled",
+    "endpoint": "",
+    "method": "POST",
+    "successMessage": "Thanks. Your message has been captured. Replace the demo endpoint in src/data/site.json to make this form live.",
+    "errorMessage": "This demo form is not connected yet. Update src/data/site.json with your REST API endpoint."
+  }
+}

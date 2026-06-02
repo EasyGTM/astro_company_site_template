@@ -1,0 +1,32 @@
+# build output
+dist/
+.output/
+.json/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+pnpm-debug.log*
+.eslintcache
+
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+# ignore .astro directory
+.astro
+
+# ide
+.idea/
+
+# Local Netlify folder
+.netlify
+
+# Local Vercel folder
+.vercel

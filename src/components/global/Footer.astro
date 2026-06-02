@@ -1,0 +1,91 @@
+---
+import Logo from "@/components/Logo.astro";
+import Social from "@/components/Social.astro";
+import { site } from "@/lib/site";
+import { markdownify } from "@/lib/utils/textConverter";
+
+const year = new Date().getFullYear();
+const footerLinks = site.navigation.footer;
+const footerGroups = [
+  {
+    title: "Explore",
+    links: footerLinks.filter((item) =>
+      ["/", "/services", "/work", "/insights", "/process"].includes(item.url),
+    ),
+  },
+  {
+    title: "Company",
+    links: footerLinks.filter((item) =>
+      ["/about", "/faq", "/contact"].includes(item.url),
+    ),
+  },
+  {
+    title: "Legal",
+    links: footerLinks.filter((item) =>
+      ["/privacy-policy", "/terms-of-service"].includes(item.url),
+    ),
+  },
+];
+---
+
+<footer
+  class="border-t border-border bg-light pt-20 pb-10 px-6 md:px-10 dark:border-darkmode-border dark:bg-darkmode-light"
+>
+  <div
+    class="max-w-7xl mx-auto grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-20 mb-20"
+  >
+    <div class="flex flex-col gap-6 max-w-xl">
+      <Logo />
+      <h2
+        class="text-3xl md:text-5xl font-primary font-bold text-text-dark dark:text-darkmode-text-dark leading-[0.95]"
+      >
+        {site.footer.headline}
+      </h2>
+      <p class="text-lg text-text dark:text-darkmode-text">
+        {site.footer.subheadline}
+      </p>
+      <Social source={site.social.main} className="social-icons" />
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-10">
+      {
+        footerGroups.map((group) => (
+          <nav aria-label={group.title}>
+            <h3 class="mb-5 text-xs font-bold uppercase tracking-widest text-primary dark:text-darkmode-primary">
+              {group.title}
+            </h3>
+            <ul class="space-y-3">
+              {group.links.map((item) => (
+                <li>
+                  <a
+                    href={item.url}
+                    class="text-text transition-colors hover:text-primary dark:text-darkmode-text/80 dark:hover:text-darkmode-primary"
+                  >
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))
+      }
+    </div>
+  </div>
+
+  <div
+    class="max-w-7xl mx-auto border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4 dark:border-darkmode-border"
+  >
+    <p
+      class="text-sm text-text dark:text-darkmode-text/60"
+      set:html={markdownify(
+        site.footer.copyright.replace("2026", String(year)),
+      )}
+    />
+    <a
+      href={site.cta.link}
+      class="text-sm font-bold uppercase tracking-widest text-text transition-colors hover:text-primary dark:text-darkmode-text/80 dark:hover:text-darkmode-primary"
+    >
+      {site.cta.label}
+    </a>
+  </div>
+</footer>

@@ -1,0 +1,42 @@
+---
+import { render } from "astro:content";
+import Base from "@/layouts/Base.astro";
+import { getPage } from "@/lib/content";
+import { buildBreadcrumbSchema, absoluteUrl } from "@/lib/site";
+
+const processPage = await getPage("process");
+
+if (!processPage) {
+  throw new Error("Missing process page content entry.");
+}
+
+const { Content } = await render(processPage);
+
+const schema = buildBreadcrumbSchema([
+  { name: "Home", item: absoluteUrl("/") },
+  { name: "Process", item: absoluteUrl("/process") },
+]);
+---
+
+<Base
+  title={processPage.data.title}
+  meta_title={processPage.data.meta_title}
+  description={processPage.data.description}
+  image={processPage.data.image}
+  schema={schema}
+>
+  <section class="section pt-36">
+    <div class="container max-w-5xl">
+      <div class="fade-in-section">
+        <span class="eyebrow">{processPage.data.kicker}</span>
+        <h1 class="type-h1 mt-4">
+          {processPage.data.hero_title || processPage.data.title}
+        </h1>
+        <p class="type-lead mt-6 max-w-3xl">{processPage.data.hero_intro}</p>
+      </div>
+      <div class="content mt-14 fade-in-section">
+        <Content />
+      </div>
+    </div>
+  </section>
+</Base>

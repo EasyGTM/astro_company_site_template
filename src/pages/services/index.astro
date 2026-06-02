@@ -1,0 +1,79 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getServices } from "@/lib/content";
+import { absoluteUrl, buildBreadcrumbSchema } from "@/lib/site";
+
+const services = await getServices();
+
+const schema = buildBreadcrumbSchema([
+  { name: "Home", item: absoluteUrl("/") },
+  { name: "Services", item: absoluteUrl("/services") },
+]);
+---
+
+<Base
+  title="Services"
+  description="Generic demo services for strategy, websites, content, demand generation, and analytics. Replace the entries in src/content/services to fit your firm."
+  schema={schema}
+>
+  <section class="section pt-36">
+    <div class="container">
+      <div class="fade-in-section max-w-4xl">
+        <span class="eyebrow">Services</span>
+        <h1 class="type-h1 mt-4">
+          Collection-driven service pages that are easy to reframe.
+        </h1>
+        <p class="type-lead mt-6">
+          Each page is driven by content fields for summary, deliverables,
+          outcomes, timeline, and engagement model so users can rebrand the
+          offer without breaking the layout.
+        </p>
+      </div>
+
+      <div class="mt-14 grid gap-6 lg:grid-cols-2">
+        {
+          services.map((service, index) => (
+            <article
+              class="fade-in-section rounded-[1.75rem] border border-border bg-white p-8 shadow-[0_24px_80px_rgba(16,24,40,0.06)] dark:border-darkmode-border dark:bg-theme-darkmode-body"
+              style={`transition-delay:${index * 75}ms`}
+            >
+              <span class="eyebrow">{service.data.category}</span>
+              <h2 class="type-h2-primary mt-4">{service.data.title}</h2>
+              <p class="type-body mt-4">{service.data.summary}</p>
+              <div class="mt-8 grid gap-4 md:grid-cols-2">
+                <div>
+                  <p class="text-sm font-bold uppercase tracking-widest text-text-dark dark:text-darkmode-text-dark">
+                    Timeline
+                  </p>
+                  <p class="mt-2 text-text dark:text-darkmode-text">
+                    {service.data.timeline}
+                  </p>
+                </div>
+                <div>
+                  <p class="text-sm font-bold uppercase tracking-widest text-text-dark dark:text-darkmode-text-dark">
+                    Model
+                  </p>
+                  <p class="mt-2 text-text dark:text-darkmode-text">
+                    {service.data.engagement_model}
+                  </p>
+                </div>
+              </div>
+              <ul class="mt-8 space-y-2 text-sm text-text dark:text-darkmode-text">
+                {service.data.deliverables.slice(0, 4).map((deliverable) => (
+                  <li>• {deliverable}</li>
+                ))}
+              </ul>
+              <a
+                href={`/services/${service.id}`}
+                class="mt-8 inline-flex items-center gap-2 font-bold uppercase tracking-widest text-sm text-primary"
+              >
+                Read service page
+                <span aria-hidden="true">→</span>
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>

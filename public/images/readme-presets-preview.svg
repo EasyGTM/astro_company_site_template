@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" fill="none">
+  <rect width="1280" height="720" rx="32" fill="#F6F8FB" />
+  <text x="80" y="124" fill="#101828" font-family="Sora, Arial, sans-serif" font-size="56" font-weight="700">
+    Three starter presets
+  </text>
+  <text x="80" y="176" fill="#526174" font-family="Manrope, Arial, sans-serif" font-size="28">
+    Agency, consultancy, and studio packs share one codebase.
+  </text>
+
+  <rect x="80" y="244" width="340" height="360" rx="28" fill="#FFFFFF" stroke="#DBE5F3" />
+  <rect x="112" y="280" width="104" height="18" rx="9" fill="#D8E7FF" />
+  <text x="112" y="348" fill="#101828" font-family="Sora, Arial, sans-serif" font-size="40" font-weight="700">
+    Agency
+  </text>
+  <text x="112" y="394" fill="#526174" font-family="Manrope, Arial, sans-serif" font-size="24">
+    Campaign-driven
+  </text>
+  <text x="112" y="428" fill="#526174" font-family="Manrope, Arial, sans-serif" font-size="24">
+    service positioning
+  </text>
+  <rect x="112" y="490" width="176" height="46" rx="23" fill="#1F6FFF" />
+  <text x="200" y="519" text-anchor="middle" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="18" font-weight="700">
+    Default preset
+  </text>
+
+  <rect x="470" y="244" width="340" height="360" rx="28" fill="#FFFFFF" stroke="#CCE8E2" />
+  <rect x="502" y="280" width="132" height="18" rx="9" fill="#D8F4ED" />
+  <text x="502" y="348" fill="#101828" font-family="Sora, Arial, sans-serif" font-size="40" font-weight="700">
+    Consultancy
+  </text>
+  <text x="502" y="394" fill="#526174" font-family="Manrope, Arial, sans-serif" font-size="24">
+    Executive-ready
+  </text>
+  <text x="502" y="428" fill="#526174" font-family="Manrope, Arial, sans-serif" font-size="24">
+    decision support
+  </text>
+  <rect x="502" y="490" width="176" height="46" rx="23" fill="#0F9D7A" />
+  <text x="590" y="519" text-anchor="middle" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="18" font-weight="700">
+    Strategy tone
+  </text>
+
+  <rect x="860" y="244" width="340" height="360" rx="28" fill="#FFFFFF" stroke="#FFD5CC" />
+  <rect x="892" y="280" width="112" height="18" rx="9" fill="#FFE6DE" />
+  <text x="892" y="348" fill="#101828" font-family="Sora, Arial, sans-serif" font-size="40" font-weight="700">
+    Studio
+  </text>
+  <text x="892" y="394" fill="#526174" font-family="Manrope, Arial, sans-serif" font-size="24">
+    Portfolio-forward
+  </text>
+  <text x="892" y="428" fill="#526174" font-family="Manrope, Arial, sans-serif" font-size="24">
+    creative positioning
+  </text>
+  <rect x="892" y="490" width="176" height="46" rx="23" fill="#FF6F4D" />
+  <text x="980" y="519" text-anchor="middle" fill="#FFFFFF" font-family="Manrope, Arial, sans-serif" font-size="18" font-weight="700">
+    Visual-first
+  </text>
+</svg>

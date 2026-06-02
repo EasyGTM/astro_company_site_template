@@ -1,0 +1,141 @@
+{
+  "site": {
+    "name": "Skynet Consulting",
+    "title": "Skynet Consulting | Services Company Template",
+    "base_url": "https://skynet.example",
+    "base_path": "/",
+    "trailing_slash": false,
+    "locale": "en-US",
+    "favicon": "/images/favicon.svg",
+    "logo": "/images/logo.svg",
+    "logo_darkmode": "/images/logo-dark.svg",
+    "logo_width": "172",
+    "logo_height": "40",
+    "logo_text": "Skynet Consulting"
+  },
+  "company": {
+    "name": "Skynet Consulting",
+    "legal_name": "Skynet Consulting LLC",
+    "tagline": "Decision-grade websites for consultancies with complex offers and longer sales cycles.",
+    "description": "Skynet Consulting is the demo consultancy preset. It leans into executive clarity, trust, methodology, and service pages built for considered buying journeys.",
+    "email": "hello@skynet.example",
+    "phone": "+1 (555) 010-2026",
+    "location": "Remote-first, serving North America and Europe",
+    "founding_date": "2026",
+    "areas_served": ["US", "CA", "GB", "DE", "NL"],
+    "same_as": [
+      "https://www.linkedin.com/company/skynet-consulting-template",
+      "https://github.com/skynet-consulting-template"
+    ]
+  },
+  "settings": {
+    "search": false,
+    "sticky_header": true,
+    "theme_switcher": true,
+    "default_theme": "system",
+    "pagination": 6,
+    "summary_length": 180
+  },
+  "seo": {
+    "default_title": "Skynet Consulting | Services Company Template",
+    "title_template": "%s | Skynet Consulting",
+    "meta_author": "Skynet Consulting",
+    "default_description": "A fast Astro template for agencies, consultancies, and service firms that care about performance, SEO, and answer-engine visibility.",
+    "default_image": "/images/og-template.svg",
+    "robots": "index,follow",
+    "robots_txt": {
+      "rules": [
+        {
+          "userAgent": "*",
+          "allow": ["/"],
+          "disallow": []
+        }
+      ],
+      "sitemaps": ["/sitemap-index.xml"]
+    },
+    "sitemap_exclude": []
+  },
+  "llms": {
+    "purpose": "Skynet Consulting uses this site to explain its services, show proof of work, publish insights, and capture new inquiries through a configurable contact flow.",
+    "routes": [
+      { "label": "Home", "url": "/" },
+      { "label": "Services", "url": "/services" },
+      { "label": "Work", "url": "/work" },
+      { "label": "Insights", "url": "/insights" },
+      { "label": "Process", "url": "/process" },
+      { "label": "About", "url": "/about" },
+      { "label": "Contact", "url": "/contact" }
+    ],
+    "notes": [
+      "Content is written in an answer-first style with clear headings and scannable sections.",
+      "Services, work, and insights live in structured content collections.",
+      "Organization, service, article, FAQ, and breadcrumb schema may appear when relevant."
+    ]
+  },
+  "aeo": {
+    "enabled": true,
+    "summary_style": "answer-first",
+    "content_notes": [
+      "Lead with the direct answer before supporting detail.",
+      "Use clear heading hierarchy and scannable lists.",
+      "Keep definitions, checklists, and FAQs easy to extract."
+    ]
+  },
+  "navigation": {
+    "main": [
+      { "name": "Home", "url": "/" },
+      { "name": "Services", "url": "/services" },
+      { "name": "Work", "url": "/work" },
+      { "name": "Insights", "url": "/insights" },
+      { "name": "Process", "url": "/process" },
+      { "name": "About", "url": "/about" }
+    ],
+    "footer": [
+      { "name": "Home", "url": "/" },
+      { "name": "Services", "url": "/services" },
+      { "name": "Work", "url": "/work" },
+      { "name": "Insights", "url": "/insights" },
+      { "name": "Process", "url": "/process" },
+      { "name": "About", "url": "/about" },
+      { "name": "FAQ", "url": "/faq" },
+      { "name": "Contact", "url": "/contact" },
+      { "name": "Privacy Policy", "url": "/privacy-policy" },
+      { "name": "Terms of Service", "url": "/terms-of-service" }
+    ]
+  },
+  "cta": {
+    "label": "Start a project",
+    "link": "/contact"
+  },
+  "footer": {
+    "headline": "Clarify a complex consulting offer without burying it in jargon or long PDFs.",
+    "subheadline": "This preset favors stronger strategic language, retrieval-friendly explanations, and proof framed for high-trust buying decisions.",
+    "copyright": "© 2026 Skynet Consulting. Replace with your company name. | [Privacy Policy](/privacy-policy) | [Terms of Service](/terms-of-service)"
+  },
+  "social": {
+    "main": [
+      {
+        "name": "LinkedIn",
+        "icon": "FaLinkedinIn",
+        "link": "https://www.linkedin.com/company/skynet-consulting-template"
+      },
+      {
+        "name": "GitHub",
+        "icon": "FaGithub",
+        "link": "https://github.com/skynet-consulting-template"
+      },
+      {
+        "name": "X",
+        "icon": "FaXTwitter",
+        "link": "https://x.com/skynetconsulting"
+      }
+    ]
+  },
+  "form": {
+    "mode": "disabled",
+    "endpoint": "",
+    "method": "POST",
+    "successMessage": "Thanks. Your message has been captured. Replace the demo endpoint in src/data/site.json to make this form live.",
+    "errorMessage": "This demo form is not connected yet. Update src/data/site.json with your REST API endpoint."
+  }
+}

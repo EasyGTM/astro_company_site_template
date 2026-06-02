@@ -1,0 +1,334 @@
+---
+import Base from "@/layouts/Base.astro";
+import faqs from "@/data/faqs.json";
+import {
+  getFeaturedInsights,
+  getFeaturedServices,
+  getFeaturedWork,
+} from "@/lib/content";
+import { site } from "@/lib/site";
+
+const services = await getFeaturedServices(3);
+const work = await getFeaturedWork(3);
+const insights = await getFeaturedInsights(3);
+
+const homeSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.slice(0, 4).map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<Base
+  title="Services Company Template"
+  description="A fast Astro template for service firms that want performance, SEO, AEO, structured data, and a clean editing model."
+  schema={homeSchema}
+>
+  <section class="section pt-36 md:pt-44">
+    <div class="container">
+      <div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+        <div class="fade-in-section">
+          <span
+            class="eyebrow mb-5 inline-flex rounded-full border border-border bg-white/60 px-4 py-2 dark:border-darkmode-border dark:bg-darkmode-light/60"
+          >
+            Astro template for agencies, consultancies, and service firms
+          </span>
+          <h1 class="type-display max-w-4xl">
+            Launch a service company site that is built for <span
+              class="text-primary dark:text-darkmode-primary"
+              >speed, SEO, and AEO</span
+            >.
+          </h1>
+          <p class="type-lead mt-8 max-w-3xl">
+            This template gives you a polished home page, service pages, case
+            studies, insights, legal pages, structured data, and content
+            collections that are easy for humans and AI IDEs to update.
+          </p>
+          <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+            <a href={site.cta.link} class="btn btn-primary-cta"
+              >{site.cta.label}</a
+            >
+            <a href="/services" class="btn btn-outline-primary"
+              >Explore services</a
+            >
+          </div>
+        </div>
+
+        <aside
+          class="fade-in-section rounded-[2rem] border border-border bg-white/80 p-8 shadow-[0_24px_80px_rgba(31,111,255,0.08)] dark:border-darkmode-border dark:bg-darkmode-light/80"
+        >
+          <h2 class="type-h3 mb-6">What ships in the box</h2>
+          <ul class="space-y-4 text-base text-text dark:text-darkmode-text">
+            <li>
+              Static-first Astro architecture with lightweight interactivity.
+            </li>
+            <li>Collection-driven services, work, and insight content.</li>
+            <li>Configurable contact form with REST endpoint support.</li>
+            <li>Structured data, sitemap, robots, and `llms.txt` defaults.</li>
+            <li>AI-editor docs for Codex, Claude, Gemini, and Copilot.</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid gap-6 md:grid-cols-3">
+        {
+          [
+            [
+              "Performance by default",
+              "Minimal client JavaScript, static output, and optimized assets keep the site fast before you do any tuning.",
+            ],
+            [
+              "SEO-ready structure",
+              "Canonicals, metadata, schema, and content-first routes make it easy to publish clean service pages and articles.",
+            ],
+            [
+              "AEO-friendly patterns",
+              "Answer-first intros, scannable sections, FAQ content, and `llms.txt` help AI tools understand what the site is about.",
+            ],
+          ].map(([title, copy], index) => (
+            <article
+              class="fade-in-section rounded-[1.75rem] border border-border bg-light/70 p-8 dark:border-darkmode-border dark:bg-darkmode-light/70"
+              style={`transition-delay:${index * 90}ms`}
+            >
+              <h2 class="type-h3 mb-4">{title}</h2>
+              <p class="type-body">{copy}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-light/60 dark:bg-darkmode-light/60">
+    <div class="container">
+      <div
+        class="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+      >
+        <div class="fade-in-section">
+          <span class="eyebrow">Services</span>
+          <h2 class="type-h2-primary mt-3">
+            Demo service pages with structure, not filler.
+          </h2>
+          <p class="type-body mt-4 max-w-3xl">
+            Each service entry comes from Markdown frontmatter plus body
+            content, so users can change positioning, deliverables, and proof
+            without rewriting page components.
+          </p>
+        </div>
+        <a href="/services" class="btn btn-outline-primary fade-in-section"
+          >View all services</a
+        >
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-3">
+        {
+          services.map((service, index) => (
+            <article
+              class="fade-in-section rounded-[1.75rem] border border-border bg-white/80 p-8 dark:border-darkmode-border dark:bg-theme-darkmode-body/80"
+              style={`transition-delay:${index * 90}ms`}
+            >
+              <span class="eyebrow">{service.data.category}</span>
+              <h3 class="type-h3 mt-4">{service.data.title}</h3>
+              <p class="type-body mt-4">{service.data.summary}</p>
+              <ul class="mt-6 space-y-2 text-sm text-text dark:text-darkmode-text">
+                {service.data.outcomes.slice(0, 3).map((outcome) => (
+                  <li>• {outcome}</li>
+                ))}
+              </ul>
+              <a
+                href={`/services/${service.id}`}
+                class="mt-8 inline-flex items-center gap-2 font-bold uppercase tracking-widest text-sm text-primary"
+              >
+                Explore service
+                <span aria-hidden="true">→</span>
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="mb-12 fade-in-section">
+        <span class="eyebrow">Process</span>
+        <h2 class="type-h2-primary mt-3">
+          A reusable process page for service-led teams.
+        </h2>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        {
+          [
+            [
+              "1. Diagnose",
+              "Clarify positioning, demand signals, and buyer friction before you redesign anything.",
+            ],
+            [
+              "2. Shape",
+              "Translate strategy into page architecture, offers, proof, and content priorities.",
+            ],
+            [
+              "3. Publish",
+              "Launch a fast site with clear service pages, case studies, and structured metadata.",
+            ],
+            [
+              "4. Improve",
+              "Measure what people find, ask, and convert on, then iterate the content system.",
+            ],
+          ].map(([title, copy], index) => (
+            <article
+              class="fade-in-section rounded-[1.75rem] border border-border bg-white/70 p-7 dark:border-darkmode-border dark:bg-darkmode-light/70"
+              style={`transition-delay:${index * 80}ms`}
+            >
+              <h3 class="type-h3 mb-4">{title}</h3>
+              <p class="type-body">{copy}</p>
+            </article>
+          ))
+        }
+      </div>
+      <a href="/process" class="btn btn-secondary-cta mt-10"
+        >Read the process page</a
+      >
+    </div>
+  </section>
+
+  <section class="section bg-light/60 dark:bg-darkmode-light/60">
+    <div class="container">
+      <div
+        class="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+      >
+        <div class="fade-in-section">
+          <span class="eyebrow">Work</span>
+          <h2 class="type-h2-primary mt-3">
+            Generic case studies you can replace with your own proof.
+          </h2>
+        </div>
+        <a href="/work" class="btn btn-outline-primary fade-in-section"
+          >Browse case studies</a
+        >
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-3">
+        {
+          work.map((entry, index) => (
+            <article
+              class="fade-in-section overflow-hidden rounded-[1.75rem] border border-border bg-white shadow-[0_24px_80px_rgba(16,24,40,0.06)] dark:border-darkmode-border dark:bg-theme-darkmode-body"
+              style={`transition-delay:${index * 90}ms`}
+            >
+              <img
+                src={entry.data.image}
+                alt={entry.data.title}
+                class="h-52 w-full object-cover"
+                loading="lazy"
+              />
+              <div class="p-8">
+                <span class="eyebrow">{entry.data.sector}</span>
+                <h3 class="type-h3 mt-4">{entry.data.title}</h3>
+                <p class="type-body mt-4">{entry.data.description}</p>
+                <ul class="mt-6 space-y-2 text-sm text-text dark:text-darkmode-text">
+                  {entry.data.results.slice(0, 3).map((result) => (
+                    <li>• {result}</li>
+                  ))}
+                </ul>
+                <a
+                  href={`/work/${entry.id}`}
+                  class="mt-8 inline-flex items-center gap-2 font-bold uppercase tracking-widest text-sm text-primary"
+                >
+                  Read case study
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div
+        class="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+      >
+        <div class="fade-in-section">
+          <span class="eyebrow">Insights</span>
+          <h2 class="type-h2-primary mt-3">
+            Demo content designed for search engines and answer engines.
+          </h2>
+        </div>
+        <a href="/insights" class="btn btn-outline-primary fade-in-section"
+          >Read all insights</a
+        >
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-3">
+        {
+          insights.map((post, index) => (
+            <article
+              class="fade-in-section rounded-[1.75rem] border border-border bg-white/80 p-8 dark:border-darkmode-border dark:bg-darkmode-light/80"
+              style={`transition-delay:${index * 90}ms`}
+            >
+              <span class="eyebrow">{post.data.categories[0]}</span>
+              <h3 class="type-h3 mt-4">{post.data.title}</h3>
+              <p class="type-body mt-4">{post.data.description}</p>
+              <a
+                href={`/insights/${post.id}`}
+                class="mt-8 inline-flex items-center gap-2 font-bold uppercase tracking-widest text-sm text-primary"
+              >
+                Read insight
+                <span aria-hidden="true">→</span>
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-light/60 dark:bg-darkmode-light/60">
+    <div class="container">
+      <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <div class="fade-in-section">
+          <span class="eyebrow">FAQ</span>
+          <h2 class="type-h2-primary mt-3">
+            The content model is simple on purpose.
+          </h2>
+          <p class="type-body mt-4 max-w-xl">
+            The idea is to let teams ship quickly. Brand settings live in one
+            file, major content lives in collections, and the docs tell AI
+            editors where to make safe changes.
+          </p>
+          <a href="/faq" class="btn btn-secondary-cta mt-8">Open the full FAQ</a
+          >
+        </div>
+        <div class="space-y-4">
+          {
+            faqs.slice(0, 4).map((faq, index) => (
+              <details
+                class="fade-in-section rounded-[1.5rem] border border-border bg-white px-6 py-5 dark:border-darkmode-border dark:bg-theme-darkmode-body"
+                style={`transition-delay:${index * 75}ms`}
+              >
+                <summary class="cursor-pointer list-none font-bold text-text-dark dark:text-darkmode-text-dark">
+                  {faq.question}
+                </summary>
+                <p class="type-body mt-4">{faq.answer}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

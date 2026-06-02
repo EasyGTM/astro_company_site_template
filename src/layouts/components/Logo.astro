@@ -1,0 +1,37 @@
+---
+import { site } from "@/lib/site";
+
+const { src, srcDarkmode }: { src?: string; srcDarkmode?: string } =
+  Astro.props;
+const width = Number.parseInt(site.site.logo_width, 10);
+const height = Number.parseInt(site.site.logo_height, 10);
+---
+
+<a
+  href="/"
+  class="navbar-brand inline-flex items-center gap-3"
+  aria-label={`${site.company.name} home`}
+>
+  <img
+    src={src || site.site.logo}
+    alt={site.company.name}
+    width={width}
+    height={height}
+    class={`h-10 w-auto ${site.settings.theme_switcher ? "dark:hidden" : ""}`}
+    loading="eager"
+    decoding="async"
+  />
+  {
+    site.settings.theme_switcher && (
+      <img
+        src={srcDarkmode || site.site.logo_darkmode}
+        alt={site.company.name}
+        width={width}
+        height={height}
+        class="hidden h-10 w-auto dark:inline-block"
+        loading="eager"
+        decoding="async"
+      />
+    )
+  }
+</a>
